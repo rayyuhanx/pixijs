@@ -1,0 +1,60 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Make a sprite from a tileset sub-image</title>
+</head>
+
+<body>
+    <script src="../pixi.js"></script>
+    <script type="text/javascript">
+        // Aliases
+        var Container = PIXI.Container,
+            autoDetectRenderer = PIXI.autoDetectRenderer,
+            loader = PIXI.loader,
+            resources = PIXI.loader.resources,
+            Sprite = PIXI.Sprite,
+            TextureCache = PIXI.utils.TextureCache,
+            Rectangle = PIXI.Rectangle;
+
+        // Create a Pixi stage and renderer and add the
+        // renderer.view to the DOM
+        var stage = new Container(),
+            renderer = autoDetectRenderer(256, 256);
+        document.body.appendChild(renderer.view);
+
+        // Load and image and run the `setup` function when it's done
+        loader
+            .add("images/tileset.png")
+            .load(setup);
+
+        function setup() {
+            // Create the `tileset` sprite from the texture
+            var texture = TextureCache["images/tileset.png"];
+
+            // Create a rectangle object that defines the position and
+            // size of the sub-image you want to extract from the texture
+            var rectangle = new Rectangle(96, 64, 32, 32);
+
+            // Tell the texture to use that rectangular section
+            texture.frame = rectangle;
+
+            // Create the sprite from the texture
+            var rocket = new Sprite(texture);
+
+            // Position the rocket sprite on the canvas
+            rocket.x = 96;
+            rocket.y = 96;
+
+            
+            // Add the rocket to stage
+            stage.addChild(rocket);
+
+            // Render the stage
+            renderer.render(stage);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Positioning sprites</title>
+</head>
+
+<body>
+    <script src="../pixi.js"></script>
+    <script type="text/javascript">
+        var Container = PIXI.Container,
+            autoDetectRenderer = PIXI.autoDetectRenderer,
+            loader = PIXI.loader,
+            resources = PIXI.loader.resources,
+            Sprite = PIXI.Sprite;
+
+
+        var stage = new Container(),
+            renderer = autoDetectRenderer(256, 256);
+        document.body.appendChild(renderer.view);
+
+        PIXI.loader.add('images/cat.png').load(setup);
+
+        function setup() {
+            // Create the `cat` sprite
+            var cat = new Sprite(resources['images/cat.png'].texture);
+
+            // Change the sprite's position
+            cat.x = 96;
+            cat.y = 96;
+
+            // Add the cat to the stage so you can see it
+            stage.addChild(cat);
+            
+            // Render the stage
+            renderer.render(stage);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Monitoring load progress</title>
+</head>
+
+<body>
+    <p id="p"></p>
+    <script src="../pixi.js"></script>
+    <script type="text/javascript">
+        PIXI.loader
+        .add(["images/cat.png"])
+        .on("progress", loadProgressHandler)
+        .load(setup);
+
+        function loadProgressHandler(loader, resource) {
+            //Display the file `url` currently being loaded
+            console.log("loading: " + resource.url);
+            //Display the precentage of files currently loaded
+            console.log("progress: " + loader.progress + "%");
+
+            p.innerText = "loading " + resource.url;
+            //p.innerText = "loading";
+            //console.log("loading");
+        }
+        function setup() {
+            // delay show info
+            setTimeout(function () {
+                p.innerText = "load complete!";
+            }, 2000);
+            console.log("setup");
+        }
+    </script>
+</body>
+
+</html>
